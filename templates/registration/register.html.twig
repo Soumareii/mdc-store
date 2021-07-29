@@ -7,7 +7,7 @@
         <div class="alert alert-danger" role="alert">{{ flashError }}</div>
     {% endfor %}
 
-    <section class="section">
+    <section class="item-details section" style="margin-top: 12px;">
         <div class="container">
             <div class="top-area">
                 <div class="row">
@@ -18,29 +18,33 @@
                         </div>
                     </div>
                 </div>
-                <div class="row align-items-center">
+                <div class="row ">
                     <fieldset class="col-12">
-                        {{ form_start(registrationForm) }}
-                            <div class="form-group">
-                                {{ form_row(registrationForm.name) }}
-                            </div>
-                            <div class="form-group">
-                                {{ form_row(registrationForm.email) }}
-                            </div>
-                            <div class="form-group">
-                                {{ form_row(registrationForm.plainPassword, {
-                                    label: 'Mot de passe'
-                                }) }}
-                            </div>
-                            <div class="form-group">
-                                {{ form_row(registrationForm.agreeTerms, {
-                                    label: 'Accepter les conditions '
-                                }) }}
-                            </div>
-                            <div class="form-group">
-                                <div class="button"><button type="submit" class="btn">Register</button></div>
-                            </div>
-                        {{ form_end(registrationForm) }}
+                        <div style="margin-left: 5%; margin-right: 5%; margin-bottom: 3%;">
+                            {{ form_start(registrationForm) }}
+                                <div class="form-group" style="margin-bottom: 2%;">
+                                    {{ form_row(registrationForm.name, {
+                                        label: 'Pseudo'
+                                    }) }}
+                                </div>
+                                <div class="form-group"style="margin-bottom: 2%;">
+                                    {{ form_row(registrationForm.email) }}
+                                </div>
+                                <div class="form-group" style="margin-bottom: 2%;">
+                                    {{ form_row(registrationForm.plainPassword, {
+                                        label: 'Mot de passe'
+                                    }) }}
+                                </div>
+                                <div class="form-group" style="margin-bottom: 3%;">
+                                    {{ form_row(registrationForm.agreeTerms, {
+                                        label: 'Accepter les conditions '
+                                    }) }}
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary">S'inscrire</button>
+                                </div>
+                            {{ form_end(registrationForm) }}
+                        </div>
 
                     </fieldset>
                 </div>

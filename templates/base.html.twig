@@ -82,12 +82,12 @@
             <div class="topbar">
                 <div class="container">
                     <div class="row align-items-center">
-                        <div class="col-lg-4 col-md-4 col-12">
+                        <div class="col-lg-4 col-md-2 col-12">
                             <div class="top-left">
                                 <div><strong>MDC Store</strong></div>
                             </div>
                         </div>
-                        <div class="col-lg-4 col-md-4 col-12">
+                        <div class="col-lg-4 col-md-5 col-12">
                             <div class="top-middle">
                                 <ul class="useful-links">
                                     <li><a href="{{path('app_home')}}">Accueil</a></li>
@@ -96,7 +96,7 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="col-lg-4 col-md-4 col-12">
+                        <div class="col-lg-4 col-md-5 col-12">
                             <div class="top-end">
                                 <div class="user">
                                     <i class="lni lni-user"></i>
@@ -104,10 +104,10 @@
                                 </div>
                                 <ul class="user-login">
                                     <li>
-                                        <a href="login.html">Connexion</a>
+                                        <a href="{{path('app_login')}}">Connexion</a>
                                     </li>
                                     <li>
-                                        <a href="register.html">Inscription</a>
+                                        <a href="{{path('app_register')}}">Inscription</a>
                                     </li>
                                 </ul>
                             </div>
@@ -218,7 +218,7 @@
                                 <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
                                     <ul id="nav" class="navbar-nav ms-auto">
                                         <li class="nav-item">
-                                            <a href="index.html" class="active" aria-label="Toggle navigation">Accueil</a>
+                                            <a href="{{path('app_home')}}" class="active" aria-label="Toggle navigation">Accueil</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="dd-menu collapsed" href="javascript:void(0)" data-bs-toggle="collapse"
@@ -227,8 +227,8 @@
                                             <ul class="sub-menu collapse" id="submenu-1-2">
                                                 <li class="nav-item"><a href="about-us.html">A propos</a></li>
                                                 <li class="nav-item"><a href="faq.html">Demande de devis</a></li>
-                                                <li class="nav-item"><a href="login.html">Connexion</a></li>
-                                                <li class="nav-item"><a href="register.html">Inscription</a></li>
+                                                <li class="nav-item"><a href="{{path('app_login')}}">Connexion</a></li>
+                                                <li class="nav-item"><a href="{{path('app_register')}}">Inscription</a></li>
                                                 <li class="nav-item"><a href="mail-success.html">Contact</a></li>
                                             </ul>
                                         </li>
