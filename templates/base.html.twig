@@ -8,17 +8,17 @@
            and uncomment the following Encore helpers to start using Symfony UX #}
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.svg" />
+        <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/images/favicon.svg')}}"/>
 
         {% block stylesheets %}
             {#{{ encore_entry_link_tags('app') }}#}
 
             <!-- ========================= CSS here ========================= -->
-            <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
-            <link rel="stylesheet" href="assets/css/LineIcons.3.0.css" />
-            <link rel="stylesheet" href="assets/css/tiny-slider.css" />
-            <link rel="stylesheet" href="assets/css/glightbox.min.css" />
-            <link rel="stylesheet" href="assets/css/main.css" />
+            <link rel="stylesheet" href=" {{asset('assets/css/bootstrap.min.css')}} " />
+            <link rel="stylesheet" href=" {{asset('assets/css/LineIcons.3.0.css')}}" />
+            <link rel="stylesheet" href=" {{asset('assets/css/tiny-slider.css')}}" />
+            <link rel="stylesheet" href="{{asset('assets/css/glightbox.min.css')}}" />
+            <link rel="stylesheet" href="{{asset('assets/css/main.css')}}" />
 
         {% endblock %}
 
@@ -26,10 +26,10 @@
             {#{{ encore_entry_script_tags('app') }}#}
 
             <!-- ========================= JS here ========================= -->
-            <script src="assets/js/bootstrap.min.js"></script>
-            <script src="assets/js/tiny-slider.js"></script>
-            <script src="assets/js/glightbox.min.js"></script>
-            <script src="assets/js/main.js"></script>
+            <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
+            <script src="{{asset('assets/js/tiny-slider.js')}}"></script>
+            <script src="{{asset('assets/js/glightbox.min.js')}}"></script>
+            <script src="{{asset('assets/js/main.js')}}"></script>
             <script type="text/javascript">
                 //========= Hero Slider 
                 tns({
@@ -97,19 +97,34 @@
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-5 col-12">
-                            <div class="top-end">
-                                <div class="user">
-                                    <i class="lni lni-user"></i>
-                                    Hello
-                                </div>
-                                <ul class="user-login">
-                                    <li>
-                                        <a href="{{path('app_login')}}">Connexion</a>
-                                    </li>
-                                    <li>
-                                        <a href="{{path('app_register')}}">Inscription</a>
-                                    </li>
-                                </ul>
+                            <div class="top-end ">
+                                {% if app.user %}
+                                    <div class="user">
+                                        <i class="lni lni-user"></i>
+                                        
+                                    </div>
+                                    <ul class="user-login">
+                                        <li>
+                                            {{ app.user.name }}
+                                        </li>
+                                        <li>
+                                            <a href="{{path('app_logout')}}" onClick="return confirm('Vouliez-vous vous déconnectez?');">Déconnexion</a>
+                                        </li>
+                                    </ul> 
+                                {% else %}
+                                    <div class="user">
+                                        <i class="lni lni-lock"></i>
+                                        <ul class="user-login">
+                                            <li>
+                                                <a href="{{path('app_login')}}" >Connexion </a>
+                                            </li>
+                                            <li>
+                                                <a href="{{path('app_register')}}">Inscription</a>
+                                            </li>
+                                        </ul>                                
+                                    </div>
+
+                                {% endif %}
                             </div>
                         </div>
                     </div>
