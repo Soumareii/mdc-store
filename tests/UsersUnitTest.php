@@ -15,8 +15,7 @@ class UsersUnitTest extends TestCase
 
         $user->setName('Ibou')
              ->setEmail('ibou@mdc.com')
-             ->setPassword('mypass')
-             ->set;
+             ->setPassword('mypass');
         
         $this->assertTrue($user->getName() === 'Ibou');
         $this->assertTrue($user->getEmail() === 'ibou@mdc.com');

@@ -54,9 +54,15 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $products;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Blogposts::class, mappedBy="users", orphanRemoval=false)
+     */
+    private $blogposts;
+
     public function __construct()
     {
         $this->products = new ArrayCollection();
+        $this->blogposts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -196,6 +202,36 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($product->getUsers() === $this) {
                 $product->setUsers(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Blogposts[]
+     */
+    public function getBlogposts(): Collection
+    {
+        return $this->blogposts;
+    }
+
+    public function addBlogpost(Blogposts $blogpost): self
+    {
+        if (!$this->blogposts->contains($blogpost)) {
+            $this->blogposts[] = $blogpost;
+            $blogpost->setUsers($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBlogpost(Blogposts $blogpost): self
+    {
+        if ($this->blogposts->removeElement($blogpost)) {
+            // set the owning side to null (unless already changed)
+            if ($blogpost->getUsers() === $this) {
+                $blogpost->setUsers(null);
             }
         }
 
