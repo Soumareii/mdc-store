@@ -69,7 +69,7 @@ class Products
 
     /**
      * @ORM\ManyToOne(targetEntity=Categories::class, inversedBy="products")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $categories;
 
