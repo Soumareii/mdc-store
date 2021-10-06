@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\BlogpostsRepository;
 use Cocur\Slugify\Slugify;
+use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -44,7 +45,7 @@ class Blogposts
     private $slug;
 
     /**
-     * @ORM\Column(type="datetime_immutable")
+     * @ORM\Column(type="datetime")
      * 
      */
     private $createdAt;
@@ -59,6 +60,16 @@ class Blogposts
      * @ORM\OneToMany(targetEntity=Comments::class, mappedBy="blogposts", cascade={"persist", "remove"})
      */
     private $comments;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $theme;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $author;
 
     public function __construct()
     {
@@ -131,18 +142,17 @@ class Blogposts
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
+    public function getCreatedAt(): ?\DateTime
     {
         return $this->createdAt;
     }
 
     /**
-     * ORM\PrePersist
-     *
+     * @ORM\PrePersist
      */
-    public function setCreatedAt(\DateTimeImmutable $createdAt): self
+    public function setCreatedAt(): self
     {
-        $this->createdAt = $createdAt;
+        $this->createdAt = new \DateTime();
 
         return $this;
     }
@@ -185,6 +195,30 @@ class Blogposts
                 $comment->setBlogposts(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getTheme(): ?string
+    {
+        return $this->theme;
+    }
+
+    public function setTheme(string $theme): self
+    {
+        $this->theme = $theme;
+
+        return $this;
+    }
+
+    public function getAuthor(): ?string
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(string $author): self
+    {
+        $this->author = $author;
 
         return $this;
     }

@@ -35,14 +35,16 @@ class AppFixtures extends Fixture
         $user->setPassword($password);
 
         $em->persist($user);
-
+ 
         // Création de 10 Blogposts
-        for ($i = 0; $i < 10; $i) {
+        for ($i = 0; $i < 10; $i++) {
             $blogposts = new Blogposts();
 
             $blogposts->setTitle($faker->sentence(4, false))
                       ->setContent($faker->text(400))
                       ->setImage('https://picsum.photos/900/500?random='.mt_rand(1,10000))
+                      ->setTheme($faker->word())
+                      ->setAuthor($faker->sentence(2, false))
                       ->setUsers($user);
             $user->addBlogpost($blogposts);
 
@@ -50,29 +52,42 @@ class AppFixtures extends Fixture
         }
 
         // Création de 10 Produits/catégories
-        for ($j = 0; $j < 3; $j++) {
-            $categories = new Categories();
+        for ($k = 0; $k < 3; $k++) {
+            $parent = new Categories();
 
-            $categories->setName($faker->word());
-            
-            $em->persist($categories);
+            $parent->setName($faker->word());
+            $parent->setImage('https://picsum.photos/201/204?random='.mt_rand(1,100));
 
-            for ($i = 0; $i < 10; $i++) {
-                $products = new Products();
+            $em->persist($parent);
 
-                $products->setTitle($faker->word(3, false))
-                         ->setPrice(mt_rand(3000, 60000))
-                         ->setDescription($faker->text(200))
-                         ->setCoverImage('https://picsum.photos/500/450?random='.mt_rand(1,10000))
-                         ->setIsAvailable(mt_rand(0, 1))
-                         ->setUsers($user)
-                         ->setCategories($categories);
-                $user->addProduct($products);
-                $categories->addProduct($products);
-
+            for ($j = 0; $j < 3; $j++) {
+                $categories = new Categories();
+    
+                $categories->setName($faker->word());
+                $categories->setParent($parent);
+                $parent->addCategory($categories);
+                
+                $em->persist($categories);
+    
+                for ($i = 0; $i < 10; $i++) {
+                    $products = new Products();
+    
+                    $products->setTitle($faker->sentence(3, false))
+                             ->setPrice(mt_rand(3000, 60000))
+                             ->setDescription($faker->text(200))
+                             ->setCoverImage('https://picsum.photos/500/450?random='.mt_rand(1,10000))
+                             ->setIsAvailable(mt_rand(0, 1))
+                             ->setUsers($user)
+                             ->setCategories($categories);
+                    $user->addProduct($products);
+                    $categories->addProduct($products);
+    
+                    $em->persist($products);
+                }
             }
         }
-
+        
         $em->flush();
+        
     }
 }
